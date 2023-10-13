@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Guests</h2>
+  <hr />
+  <a class="mb-3 btn btn-primary" [routerLink]="['/guest/create']">
+    Create New Guest
+  </a>
+
+  <div class="col-md-12 mb-3" style="margin-top: 10px">
+    <ngx-datatable
+      class="material container striped"
+      [rows]="guests"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      rowHeight="auto"
+    >
+      <ngx-datatable-column name="Id" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.id }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Name" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.name }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Gender" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ gender[row.gender] }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Age" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.age }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a class="me-2" [routerLink]="['/guest/guest-details', row.id]">
+            <i class="fa-solid fa-circle-info text-warning"> </i>
+          </a>
+
+          <a class="me-2" [routerLink]="['/guest/edit', row.id]">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+          <a class="cursor-pointer" (click)="deleteGuest(row.id)"
+            ><i class="fa-solid fa-trash text-danger"></i
+          ></a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

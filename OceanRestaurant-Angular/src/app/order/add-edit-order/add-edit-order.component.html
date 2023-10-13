@@ -1,0 +1,89 @@
+<div class="container">
+  <h1>
+    <span *ngIf="pageMode == pageModeEnum.Create">Add Order</span>
+    <span *ngIf="pageMode == pageModeEnum.Edit">
+      <span>Edit Order</span>
+      <span class="text-primary ms-2">{{ order?.dishName }}</span>
+    </span>
+  </h1>
+  <hr />
+  <form [formGroup]="orderForm" (ngSubmit)="addEditOrder()">
+    <div class="row">
+      <div class="col-6">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>note</mat-label>
+            <input matInput formControlName="notes" />
+            <mat-error>note is required</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Choose a guest</mat-label>
+            <mat-select formControlName="guestId">
+              <mat-option *ngFor="let guest of guests" [value]="guest.id">
+                {{ guest.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Choose your dish</mat-label>
+            <mat-select
+              formControlName="dishIds"
+              multiple
+              (selectionChange)="getPrice()"
+            >
+              <mat-option *ngFor="let dish of dishes" [value]="dish.id">
+                {{ dish.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="">
+          <mat-form-field>
+            <mat-label>Select CookingMethod That You Want</mat-label>
+            <mat-select formControlName="cookingMethod">
+              <mat-option
+                *ngFor="let cookingMethod of cookingMethod | enumToArray"
+                [value]="cookingMethod.index"
+              >
+                {{ cookingMethod.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div>
+        <h2>Total Price:</h2>
+        <span>{{ totalPrice | currency }} </span>
+      </div>
+
+      <div>
+        <button
+          class="me-2"
+          [routerLink]="['/order']"
+          mat-stroked-button
+          color="basic"
+        >
+          Cancel
+        </button>
+        <button mat-flat-button color="primary" type="submit">
+          <span *ngIf="pageMode == pageModeEnum.Create">Create</span>
+          <span *ngIf="pageMode == pageModeEnum.Edit">Save</span>
+        </button>
+      </div>
+      <!-- <div class="col-6">
+        <app-uploader (onUploadFinished)="uploadFinished($event)" [config]="uploaderConfig"></app-uploader>
+      </div> -->
+    </div>
+  </form>
+</div>

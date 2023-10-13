@@ -1,0 +1,66 @@
+<div class="container">
+  <h1>
+    Order: <span class="text-primary">{{ order?.id }}</span> details
+  </h1>
+  <hr />
+  <div class="row">
+    <div class="col-md-2">Id</div>
+    <div class="col-md-10">{{ order?.id }}</div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-2">Notes</div>
+    <div class="col-md-10">{{ order?.notes }}</div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-2">Guest</div>
+    <div class="col-md-10">{{ order?.guestName }}</div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-2">OrderDate</div>
+    <div class="col-md-10">{{ order?.orderDate | date : "short" }}</div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-2">CookingMethod</div>
+    <div class="col-md-10" *ngIf="order">
+      {{ cookingMethod[order.cookingMethod] }}
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-2">Dishes</div>
+
+    <table class="table col-md-10">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">DishName</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dish of order?.dishes; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ dish.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="mt-3">
+    <button
+      class="me-2"
+      mat-stroked-button
+      color="basic"
+      [routerLink]="['/order']"
+    >
+      Back
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/order/edit', order?.id]"
+    >
+      Edit
+    </button>
+  </div>
+</div>

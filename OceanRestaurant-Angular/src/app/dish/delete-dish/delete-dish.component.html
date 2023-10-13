@@ -1,0 +1,19 @@
+<div class="container">
+  <h1 mat-dialog-title>Delete Dish</h1>
+  <div mat-dialog-content>
+    Are sure you to delete this Dish:<span class="text-primary">{{
+      data.dish.name
+    }}</span>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancle</button>
+    <button
+      mat-raised-button
+      color="warn"
+      mat-dialog-close
+      [mat-dialog-close]="true"
+    >
+      Delete
+    </button>
+  </div>
+</div>

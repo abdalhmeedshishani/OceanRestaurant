@@ -1,0 +1,70 @@
+<div class="container">
+  <h1>
+    <span *ngIf="pageMode == pageModeEnum.Create">Add Guest</span>
+    <span *ngIf="pageMode == pageModeEnum.Edit">
+      <span>Edit Guest</span>
+      <span class="text-primary ms-2">{{ guest?.name }}</span>
+    </span>
+  </h1>
+  <hr />
+  <form [formGroup]="guestForm" (ngSubmit)="addEditGuest()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" />
+            <mat-error>Name is required</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="">
+          <mat-form-field>
+            <mat-label>Select your gender</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option
+                *ngFor="let gender of genderEnum | enumToArray"
+                [value]="gender.index"
+              >
+                {{ gender.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="">
+          <mat-form-field>
+            <mat-label>Select Your Date Of Birth</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dob" />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error>You must Pick Your BirthDay Date</mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <button
+            class="me-2"
+            [routerLink]="['/guest']"
+            mat-stroked-button
+            color="basic"
+          >
+            Cancel
+          </button>
+          <button mat-flat-button color="primary" type="submit">
+            <span *ngIf="pageMode == pageModeEnum.Create">Create</span>
+            <span *ngIf="pageMode == pageModeEnum.Edit">Save</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <app-uploader
+          (onUploadFinished)="uploadFinished($event)"
+          [config]="uploaderConfig"
+          [imagesNames]="images"
+        ></app-uploader>
+      </div>
+    </div>
+  </form>
+</div>

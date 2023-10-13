@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Dishes</h2>
+  <hr />
+  <a class="mb-3 btn btn-primary" [routerLink]="['/dish/create']">
+    Create New Dish
+  </a>
+
+  <div class="col-md-12 mb-3" style="margin-top: 10px">
+    <ngx-datatable
+      class="material container striped"
+      [rows]="dishes"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      rowHeight="auto"
+    >
+      <ngx-datatable-column name="Id" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.id }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Name" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.name }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Price" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.price }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [flexGrow]="2">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a class="me-2" [routerLink]="['/order/dish-details', row.id]">
+            <i class="fa-solid fa-circle-info text-warning"> </i>
+          </a>
+
+          <a class="me-2" [routerLink]="['/dish/edit', row.id]">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+          <a class="cursor-pointer" (click)="deleteDish(row.id)"
+            ><i class="fa-solid fa-trash text-danger"></i
+          ></a>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>

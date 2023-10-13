@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "OceanRestaurant.Utils": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:64047;http://localhost:64049"
+    }
+  }
+}

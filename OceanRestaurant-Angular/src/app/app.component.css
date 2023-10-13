@@ -1,0 +1,21 @@
+.nav-list {
+  width: auto;
+  margin: auto;
+}
+
+.black {
+  background: black;
+}
+
+.pt-15 {
+  padding-top: 9rem;
+}
+
+.h5 {
+  font-size: 1.25rem;
+  margin: 0 0 12px;
+}
+
+.footer {
+  margin-top: 0;
+}

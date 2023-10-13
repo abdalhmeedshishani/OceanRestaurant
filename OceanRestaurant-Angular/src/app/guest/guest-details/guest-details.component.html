@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>
+    Guest: <span class="text-primary">{{ guest?.name }}</span> details
+  </h1>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row mt-3">
+        <div class="col-md-2">Id</div>
+        <div class="col-md-10">{{ guest?.id }}</div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-2">Name</div>
+        <div class="col-md-10">{{ guest?.name }}</div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-2">Age</div>
+        <div class="col-md-10">{{ guest?.age }}</div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-2">Date of birth</div>
+        <div class="col-md-10">{{ guest?.dob | date : "short" }}</div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-2">Gender</div>
+        <div class="col-md-10" *ngIf="guest">{{ gender[guest.gender] }}</div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <app-uploader
+        [config]="uploaderConfig"
+        [imagesNames]="images"
+      ></app-uploader>
+    </div>
+  </div>
+  <div class="mt-3">
+    <button
+      class="me-2"
+      mat-stroked-button
+      color="basic"
+      [routerLink]="['/guest']"
+    >
+      Back
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      [routerLink]="['/guest/edit', guest?.id]"
+    >
+      Edit
+    </button>
+  </div>
+</div>
